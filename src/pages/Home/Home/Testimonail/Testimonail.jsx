@@ -12,7 +12,9 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper";
-import { Rating } from '@smastrom/react-rating';
+import { Rating } from '@smastrom/react-rating'
+
+import '@smastrom/react-rating/style.css'
 
 
 const Testimonail = () => {
@@ -32,7 +34,7 @@ const Testimonail = () => {
           reviews.map(review => <SwiperSlide key={review._id}>
             <div className='flex flex-col items-center px-20'>
               <Rating
-                style={{ maxWidth: 180 }}
+                style={{ maxWidth: 120, marginTop: 30, marginBottom: 30 }}
                 value={review.rating}
 
               />
