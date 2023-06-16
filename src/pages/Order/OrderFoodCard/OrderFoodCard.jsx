@@ -14,7 +14,8 @@ const OrderFoodCard = ({ items }) => {
           <p>{recipe}</p>
 
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Order Now </button>
+
+            <button className="btn mt-8 mx-auto text-white btn-outline border-0 border-b-4"> Add to cart</button>
           </div>
         </div>
       </div>
