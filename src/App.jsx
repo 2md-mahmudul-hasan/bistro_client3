@@ -8,8 +8,6 @@ function App() {
     <>
       <button className="btn btn-ghost">Button</button>
       <button className="btn btn-secondary">Button</button>
-
-
     </>
   )
 }
