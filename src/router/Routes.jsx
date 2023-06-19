@@ -8,6 +8,7 @@ import Menu from "../pages/Menu/Menu/Menu";
 import Order from "../pages/Order/Order/Order";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import SignUp1 from "../pages/SignUp/SignUp1";
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +38,8 @@ export const router = createBrowserRouter([
       },
       {
         path: 'signUp',
-        element: <SignUp></SignUp>
+        // element: <SignUp></SignUp>
+        element:<SignUp1></SignUp1>
       }
     ]
   },
