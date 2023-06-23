@@ -2,6 +2,9 @@
 
 const OrderFoodCard = ({ items }) => {
   const { name, recipe, image, price, category } = items;
+  const handleAddToCart = (items) => {
+    console.log(items)
+  }
 
   return (
     <div>
@@ -15,7 +18,7 @@ const OrderFoodCard = ({ items }) => {
 
           <div className="card-actions justify-end">
 
-            <button className="btn mt-8 mx-auto text-white btn-outline border-0 border-b-4"> Add to cart</button>
+            <button onClick={() => handleAddToCart(items)} className="btn mt-8 mx-auto text-white btn-outline border-0 border-b-4"> Add to cart</button>
           </div>
         </div>
       </div>

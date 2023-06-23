@@ -4,22 +4,41 @@ import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Providers/AuthProviders';
+import Swal from 'sweetalert2';
 
 
 
 const SignUp1 = () => {
-  const { createUser } = useContext(authContext)
+  const { createUser, updateProfile } = useContext(authContext)
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm()
 
   const onSubmit = (data) => {
+    console.log(data)
     createUser(data.email, data.password)
       .then(result => {
         console.log(result.user)
+        updateProfile(data.name, data.photoUrl)
+          .then(() => {
+
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'user created',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            reset()
+          })
+          .catch(err => {
+            console.log(err.message)
+          })
       })
+
   }
   return (
     <>
@@ -40,6 +59,13 @@ const SignUp1 = () => {
                 </label>
                 <input {...register('name', { required: true })} type="text" placeholder="name" className="input input-bordered" />
                 {errors.name && <span className='text-warning'> Name is required</span>}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo url</span>
+                </label>
+                <input {...register('photoUrl', { required: true })} type="text" placeholder="name" className="input input-bordered" />
+                {errors.photoUrl && <span className='text-warning'> Name is required</span>}
               </div>
 
               <div className="form-control">
