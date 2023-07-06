@@ -44,7 +44,7 @@ const Login = () => {
           'Log in successful!',
           'success'
         )
-        navigate(from, {replace:true})
+        navigate(from, { replace: true })
       })
       .catch()
 
@@ -77,10 +77,11 @@ const Login = () => {
                 <span className="label-text"> <LoadCanvasTemplate /></span>
               </label>
               <input ref={captchaRef} name="captcha" type="text" placeholder="type above text" className="input input-bordered" />
-              <button onClick={validateCaptchaText} className='btn btn-secondary btn-xs my-4'>Validate captcha</button>
+              {/* <button onClick={validateCaptchaText} className='btn btn-secondary btn-xs my-4'>Validate captcha</button> */}
             </div>
             <div className="form-control mt-6">
-              <input disabled={disabled} type="submit" className="btn btn-primary" value='login' />
+              {/* <input disabled={disabled} type="submit" className="btn btn-primary" value='login' /> */}
+              <input type="submit" className="btn btn-primary" value='login' />
             </div>
           </form>
           <div>

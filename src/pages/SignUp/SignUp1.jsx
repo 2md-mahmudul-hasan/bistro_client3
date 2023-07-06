@@ -5,11 +5,12 @@ import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../Providers/AuthProviders';
 import Swal from 'sweetalert2';
+import GoogleLogin from '../GoogleLogin/GoogleLogin';
 
 
 
 const SignUp1 = () => {
-  const { createUser, updateProfile } = useContext(authContext)
+  const { createUser, profileUpdate } = useContext(authContext)
   const {
     register,
     reset,
@@ -18,21 +19,35 @@ const SignUp1 = () => {
   } = useForm()
 
   const onSubmit = (data) => {
-    console.log(data)
     createUser(data.email, data.password)
       .then(result => {
         console.log(result.user)
-        updateProfile(data.name, data.photoUrl)
-          .then(() => {
+        profileUpdate(data.name, data.photoUrl)
 
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'user created',
-              showConfirmButton: false,
-              timer: 1500
-            })
-            reset()
+          .then(() => {
+            const savedUser = { email: data.email, name: data.name }
+            fetch('http://localhost:5000/users', {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json'
+              },
+              body: JSON.stringify(savedUser)
+            }
+            )
+              .then(res => res.json())
+              .then(data => {
+                if (data.insertedId) {
+                  Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'user created',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  reset()
+                }
+              })
+
           })
           .catch(err => {
             console.log(err.message)
@@ -90,8 +105,14 @@ const SignUp1 = () => {
               </div>
             </form>
             <div className='text-secondary text-center py-4'>Already sign up <Link to='/login'> <button className='btn btn-outline'>log in here </button> </Link></div>
+            <GoogleLogin></GoogleLogin>
           </div>
         </div>
+
+
+      </div>
+      <div className="div">
+
       </div>
     </>
   )

@@ -2,15 +2,38 @@
 import { Helmet } from 'react-helmet-async';
 import UseCart from '../../../useCart/UseCart';
 import { FaTrashAlt } from 'react-icons/fa'
-
+import Swal from 'sweetalert2'
 
 const MyCart = () => {
-  const [cart] = UseCart()
+  const [cart, refetch] = UseCart()
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: 'Do you want to delete the cart?',
+
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/carts/${item._id}`, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.deletedCount > 0) {
+              refetch()
+              Swal.fire(
+                'deleted successful'
+              )
+            }
+          })
+      }
+    })
+  }
+
   console.log(cart)
   const totalPrice = cart.reduce((sum, item) => item.price + sum, 0)
   console.log(totalPrice)
   return (
-    <div>
+    <div className='w-full'>
       <Helmet>
         <title> Bistro-boss || mycart </title>
       </Helmet>
@@ -55,7 +78,7 @@ const MyCart = () => {
                 <td>
                   {row.price}
                 </td>
-                <td><button className='btn btn-sm'><FaTrashAlt /></button></td>
+                <td><button onClick={() => handleDelete(row)} className='btn btn-sm'><FaTrashAlt /></button></td>
               </tr>)
             }
 
