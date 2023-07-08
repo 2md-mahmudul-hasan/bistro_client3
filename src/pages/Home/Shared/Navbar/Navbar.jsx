@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { authContext } from '../../../../Providers/AuthProviders';
 import { FaCartArrowDown } from 'react-icons/fa';
 import UseCart from '../../../../useCart/UseCart';
+
 const Navbar = () => {
   const [cart] = UseCart()
   const { user, logOut } = useContext(authContext)
